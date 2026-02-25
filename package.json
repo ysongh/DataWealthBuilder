@@ -1,0 +1,38 @@
+{
+  "name": "datawealthbuilder",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"sleep 2 && npm run client\"",
+    "client": "vite",
+    "server": "tsx server/index.ts",
+    "build": "vite build",
+    "preview": "vite preview",
+    "db:push": "drizzle-kit push"
+  },
+  "dependencies": {
+    "@google/genai": "^1.30.0",
+    "@neondatabase/serverless": "^1.0.2",
+    "@types/ws": "^8.18.1",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.5",
+    "drizzle-kit": "^0.31.7",
+    "drizzle-orm": "^0.44.7",
+    "express": "^5.1.0",
+    "firebase-admin": "^13.6.1",
+    "lucide-react": "^0.555.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "recharts": "^3.5.0",
+    "tsx": "^4.20.6",
+    "ws": "^8.18.3",
+    "yahoo-finance2": "^3.10.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}
