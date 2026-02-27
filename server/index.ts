@@ -7,7 +7,8 @@ import { db, portfoliosCollection } from './db';
 import { FieldValue } from 'firebase-admin/firestore';
 
 const yahooFinance = new YahooFinance({ 
-  suppressNotices: ['yahooSurvey', 'ripHistorical'] 
+  suppressNotices: ['yahooSurvey', 'ripHistorical'],
+  validation: { logErrors: false }
 });
 
 const app = express();
@@ -37,7 +38,7 @@ app.get('/api/historical/:ticker', async (req: express.Request, res: express.Res
       period1: startDate.toISOString().split('T')[0],
       period2: endDate.toISOString().split('T')[0],
       interval: '1d'
-    }) as any;
+    }, { validateResult: false }) as any;
 
     const quotes = result.quotes || [];
     const data = quotes.map((item: any) => ({
@@ -60,7 +61,7 @@ app.get('/api/historical/:ticker', async (req: express.Request, res: express.Res
 app.get('/api/quote/:ticker', async (req: express.Request, res: express.Response) => {
   try {
     const { ticker } = req.params;
-    const quote = await yahooFinance.quote(ticker.toUpperCase()) as any;
+    const quote = await yahooFinance.quote(ticker.toUpperCase(), {}, { validateResult: false }) as any;
     
     res.json({
       ticker: quote.symbol,
@@ -80,7 +81,7 @@ app.get('/api/quote/:ticker', async (req: express.Request, res: express.Response
 app.get('/api/search/:query', async (req: express.Request, res: express.Response) => {
   try {
     const { query } = req.params;
-    const results = await yahooFinance.search(query) as any;
+    const results = await yahooFinance.search(query, {}, { validateResult: false }) as any;
     
     const quotes = results.quotes
       .filter((q: any) => q.quoteType === 'EQUITY' || q.quoteType === 'ETF')

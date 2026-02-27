@@ -270,7 +270,23 @@ const App = () => {
     if (!query.trim()) return;
     setIsSearching(true);
     setSearchResults([]);
-    const results = await searchAssets(query);
+    // const results = await searchAssets(query);
+    const results: Asset[] = [    
+      {
+      "ticker": "NO",
+          "name": "Norwegian Air Shuttle ASA",
+          "type": "STOCK",
+          "sector": "Industrials",
+          "assetClass": "Intl Equity"
+      },
+      {
+        "ticker": "AIR",
+        "name": "AAR Corp.",
+        "type": "STOCK",
+        "sector": "Industrials",
+        "assetClass": "US Equity"
+    }]
+    console.log(results)
     setSearchResults(results);
     setIsSearching(false);
   };
